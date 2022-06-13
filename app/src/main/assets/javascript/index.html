@@ -1,0 +1,39 @@
+
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Carson</title>
+        <script src="./vue.global.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <button type="button" id="button1" v-on:click="callAndroid()">button</button>
+        </div>
+    </body>
+
+    <script>
+    const app = Vue.createApp({
+        methods: {
+            callAndroid() {
+                // 在Android中使用addJavascriptInterface将类映射到mjs中
+                // 由于对象映射，所以调用test对象等于调用Android映射的对象
+                mjs.hello("js去调用了android中的hello方法")
+            },
+            callJS_() {
+                // 弹窗需要Android的webview需要设置setWebChromeClient
+                alert("Android调用了JS的callJS方法")
+                // 返回字符串给Android的onReceiveValue方法
+                return "Android调用了JS的callJS方法"
+            }
+        },
+    });
+    // Vue的挂载函数返回一个vm实例
+    // Android调用callJS,callJS通过VM实例调用Vue中的callJS_
+    const vm = app.mount("#app");
+    const callJS = () => vm.callJS_()
+    </script>
+
+    </html>
