@@ -20,7 +20,7 @@
         methods: {
             callAndroid() {
                 // 在Android中使用addJavascriptInterface将类映射到mjs中
-                // 由于对象映射，所以调用mjs对象等于调用Android映射的对象
+                // 由于对象映射，所以调用mjs对象等于调用Android映射的对象new JSKit()
                 mjs.hello("js去调用了android中的hello方法")
             },
             callJS_() {
